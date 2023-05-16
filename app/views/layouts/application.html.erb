@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JedisProject</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+
+  <body class="bg-light" layout-rounded="">
+    <header class="bg-dark">
+      <h1 class="content flex py-1 pl-2">Jedis Project</h1>
+    </header>
+    <main>
+      <section class="flex no-rounded">
+        <article class="container py-5" style="max-width: 128rem">
+          <%= yield %>
+        </article>
+      </section>
+    </main>
+    <footer class="bg-dark border-top border-light-darken">
+      <div class="flex row justify-contents-center py-4">
+        <h4>© - 2023</h4>
+      </div>
+    </footer>
+  </body>
+</html>

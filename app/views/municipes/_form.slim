@@ -1,0 +1,57 @@
+= simple_form_for(municipe) do |form|
+  - if municipe.errors.any?
+    div.alert.alert-danger
+      h3 #{pluralize(municipe.errors.count, "error")} prohibited this municipe from being saved:
+      ul
+        - municipe.errors.each do |error|
+          li = error.full_message
+
+  fieldset.p-1.border.px-3
+    legend Foto
+    section.mb-2.flex.row.justify-contents-center.wrap
+      section.w-50
+        - if municipe.picture.present?
+          = image_tag municipe.picture
+      div.d-none
+        = form.input :picture
+      label.button.button-primary.w-100.button-outline for="municipe_picture" Carregar Foto
+  fieldset.p-1.border.px-3
+    legend Dados
+    section.mb-2
+      = form.input :name, label: "Name"
+    section.mb-2
+      = form.input :cpf, label: "CPF"
+    section.mb-2
+      = form.input :cns, label: "CNS (Carteira nacional de Saúde)"
+    section.mb-2
+      = form.input :email, label: "E-mail"
+    section.mb-2
+      = form.input :birth, as: :string, input_html: { type: :date }
+    section.mb-2
+      = form.input :phone, label: "Telefone"
+    section.mb-2
+      = form.input :status, label: "Ativo", input_html: { class: %w[switch] }
+  fieldset.p-1.border.px-3
+    legend Endereço
+    = form.simple_fields_for :address do |address_form|
+      section.mb-2.d-none
+        = address_form.input :municipe_id, as: :hidden
+      section.mb-2
+        = address_form.input :cep, label: "CEP"
+      section.mb-2
+        = address_form.input :city, label: "Cidade"
+      section.mb-2
+        = address_form.input :state, label: "Estado"
+      section.mb-2
+        = address_form.input :neighborhood, label: "Bairro"
+      section.mb-2
+        = address_form.input :street, label: "Rua"
+      section.mb-2
+        = address_form.input :number, label: "Número", as: :integer
+      section.mb-2
+        = address_form.input :complement, label: "Complemento"
+      section.mb-2
+        = address_form.input :ibge, label: "Código IBGE"
+  section.flex.column.mb-2
+    = form.submit "Salvar", class: %w[button button-primary w-100]
+    = link_to "Cancelar", municipes_path, class: %w[button button-outline button-danger w-100 mt-1]
